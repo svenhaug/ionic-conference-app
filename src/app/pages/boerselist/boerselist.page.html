@@ -1,0 +1,102 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <!--
+      <ion-back-button text="" defaultHref="/categories"></ion-back-button>
+      -->
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Börse</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="openBoerseCreateModal()">
+        <ion-icon slot="icon-only" name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="fashion-listing-content">
+  <div *ngIf="datasavailable">
+    <ion-row class="items-row">
+      <ion-col size="6" class="listing-item" *ngFor="let item of showdata">
+        <div *ngIf="item">
+          <div [routerLink]="['/boersedetail/', item.id]">
+            <div class="item-image-wrapper">
+              <a class="image-anchor" [routerLink]="['/boersedetail/', item.id]">
+                <app-aspect-ratio [ratio]="{w: 3, h: 4}">
+                  <app-image-shell class="item-image" animation="spinner" [src]="item.bild1" [alt]="'product image'"></app-image-shell>
+                  <img [src]="item.bild1" style="border: none;">
+                </app-aspect-ratio>
+              </a>
+            </div>
+            <ion-row class="item-body">
+              <ion-col size="12" class="main-info">
+                <h4 class="item-name">
+                  <a class="name-anchor" [routerLink]="['/boersedetail/', item.id]">
+                    {{item.name}}
+                    <app-text-shell animation="gradient" [data]="item.name"></app-text-shell>
+                  </a>
+                </h4>
+              </ion-col>
+              <ion-col size="12">
+                <ion-row class="secondary-info">
+                  <ion-col class="price-col">
+                    <span class="item-sale-price">
+                      {{item.preis}}
+                      <app-text-shell animation="gradient" [data]="item.preis | currency"></app-text-shell>
+                    </span>
+                    <div *ngIf="item.reserviert == '1'" class="center" style="color: red;">reserviert</div>
+                  </ion-col>
+                  <!--
+                  <ng-container *ngIf="item.preis !== '0'">
+                    <ion-col class="separator">
+                    </ion-col>
+                    <ion-col class="price-col">
+                      <span class="item-original-price">
+                        {{item.preis}}
+                        <app-text-shell animation="gradient" [data]="item.preis | currency"></app-text-shell>
+                      </span>
+                    </ion-col>
+                  </ng-container>
+                  -->
+                </ion-row>
+              </ion-col>
+            </ion-row>
+          </div>
+          </div>
+      </ion-col>
+    </ion-row>
+  </div>
+  <div *ngIf="!datasavailable">
+    <div class="centered">
+      <br><br><br>
+      Keine Daten gefunden......
+      <br><br><br>
+    </div>
+    <div class="centered">
+      <img src="{{standardbild}}" style="width: 60%; height: 60%;">
+    </div>
+  </div>
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end" #fab>
+    <ion-fab-button  (click)="presentFilter()">
+      <ion-icon name="options"></ion-icon>
+    </ion-fab-button>
+    <!--
+    <ion-fab-list side="top">
+      <ion-fab-button color="vimeo" (click)="openSocial('Vimeo', fab)">
+        <ion-icon name="logo-vimeo"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="instagram" (click)="openSocial('Instagram', fab)">
+        <ion-icon name="logo-instagram"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="twitter" (click)="openSocial('Twitter', fab)">
+        <ion-icon name="logo-twitter"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="facebook" (click)="openSocial('Facebook', fab)">
+        <ion-icon name="logo-facebook"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+    -->
+  </ion-fab>
+</ion-content>

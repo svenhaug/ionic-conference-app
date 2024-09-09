@@ -1,0 +1,144 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <!--
+      <ion-back-button text="" defaultHref="/categories"></ion-back-button>
+      -->
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Alert</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="openAlertCreateModal()">
+        <ion-icon slot="icon-only" name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content fullscreen="true">
+  <div *ngIf="datasavailable">
+    <div class="listing-item" *ngFor="let item of showdata">
+      <div *ngIf="item">
+        <ion-card [routerLink]="['/alertdetail/', item.id]">
+          <ion-card-header>
+            <ion-card-title>{{item.name}}</ion-card-title>
+            <ion-card-subtitle>{{item.desc}}</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            {{item.kat}}
+            <ion-row>
+              <ion-col>
+                Datum: {{item.datum}}
+              </ion-col>
+              <ion-col>
+                Zeit: {{item.uhrzeit}}
+              </ion-col>
+            </ion-row>
+            <ion-card-subtitle>
+              <ion-row>
+                <ion-col col-6 no-padding>
+                  <div class="ion-text-start">
+                  {{item.adress}}
+                </div>
+                </ion-col>
+                <ion-col size="2" class="item-rating" no-padding style="font-size: 16px !important;">
+                  {{item.ratingcounter}}
+                  <ion-icon class="stats-icon" name="star-outline"></ion-icon>
+                </ion-col>
+                <ion-col size="2" class="item-reviews" no-padding style="font-size: 16px !important;">
+                  <div *ngIf="item.comments">
+                    {{item.comments.length}}
+                    <ion-icon class="stats-icon" name="albums"></ion-icon>
+                  </div>
+                  <div *ngIf="!item.comments">
+                    0
+                    <ion-icon class="stats-icon" name="albums"></ion-icon>
+                  </div>
+                </ion-col>
+              </ion-row>
+            </ion-card-subtitle>
+          </ion-card-content>
+        </ion-card>
+        <!--
+        <div [routerLink]="['/alertdetail/', item.id]">
+          <ion-row class="info-row" [routerLink]="['/alertdetail/', item.id]">
+            <ion-col class="main-info-col">
+              <h2 class="item-name">
+                {{item.name}}
+              </h2>
+              <h3 class="item-name">
+                {{item.desc}}
+              </h3>
+              <p class="item-description">
+                {{item.kat}}
+              </p>
+              <p class="item-address">
+                {{item.adress}}
+              </p>
+            </ion-col>
+          </ion-row>
+          <ion-row class="info-row" [routerLink]="['/alertdetail/', item.id]">
+            <ion-col class="main-info-col">
+              Datum: {{item.datum}}
+            </ion-col>
+            <ion-col class="main-info-col">
+              Zeit: {{item.uhrzeit}}
+            </ion-col>
+          </ion-row>
+          <ion-row class="stats-row">
+            <ion-col size="2" class="item-rating">
+              <span class="rating-value">
+                {{item.ratingcounter}}
+              </span>
+              <ion-icon class="stats-icon" src="./assets/custom-icons/travel/star.svg"></ion-icon>
+            </ion-col>
+            <ion-col size="2" class="item-reviews">
+              <span class="reviews-count">
+                <div *ngIf="item.comments">
+                  {{item.comments.length}}
+                </div>
+                <div *ngIf="!item.comments">
+                  0
+                </div>
+              </span>
+              <ion-icon class="stats-icon" src="./assets/custom-icons/travel/comments.svg"></ion-icon>
+            </ion-col>
+          </ion-row>
+        </div>
+        -->
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!datasavailable">
+    <div class="centered">
+      <br><br><br>
+      Keine Daten gefunden......
+      <br><br><br>
+    </div>
+    <div class="centered">
+      <img src="{{standardbild}}">
+    </div>
+  </div>
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end" #fab>
+    <ion-fab-button  (click)="presentFilter()">
+      <ion-icon name="options"></ion-icon>
+    </ion-fab-button>
+    <!--
+    <ion-fab-list side="top">
+      <ion-fab-button color="vimeo" (click)="openSocial('Vimeo', fab)">
+        <ion-icon name="logo-vimeo"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="instagram" (click)="openSocial('Instagram', fab)">
+        <ion-icon name="logo-instagram"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="twitter" (click)="openSocial('Twitter', fab)">
+        <ion-icon name="logo-twitter"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="facebook" (click)="openSocial('Facebook', fab)">
+        <ion-icon name="logo-facebook"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+    -->
+  </ion-fab>
+</ion-content>

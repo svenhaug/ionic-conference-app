@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Doggy
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row class="categories-list" >
+    <ion-col class="category-item travel-category" size="12">
+      <a [routerLink]="['/categorieslist']">
+      <img src="../../assets/img/categorie/community.jpg">
+        <a class="category-anchor" [routerLink]="['/categorieslist']">
+          <h2 class="category-title" >Community</h2>
+        </a>
+      </a>
+    </ion-col>
+    <ion-col class="category-item fashion-category" size="6">
+      <a [routerLink]="['/dogwalklist']">
+        <img src="../../assets/img/categorie/dogwalk.jpeg">
+        <a class="category-anchor" [routerLink]="['/dogwalklist']">
+          <h2 class="category-title">Dogwalk</h2>
+        </a>
+      </a>
+    </ion-col>
+    <ion-col class="category-item food-category" size="6">
+      <a [routerLink]="['/boerselist']">
+        <img src="../../assets/img/categorie/boerse.jpg">
+        <a class="category-anchor" [routerLink]="['/boerselist']">
+          <h2 class="category-title">Börse</h2>
+        </a>
+      </a>
+    </ion-col>    
+    <ion-col class="category-item deals-category" size="12">
+      <a [routerLink]="['/petsittinglist']">
+        <img src="../../assets/img/categorie/pet-sitting.jpg">
+        <a class="category-anchor" [routerLink]="['/petsittinglist']">
+          <h2 class="category-title">Pet-Sitting</h2>
+        </a>
+      </a>
+    </ion-col>
+    <ion-col class="category-item real-estate-category" size="12">
+      <a [routerLink]="['/alertlist']">
+        <img src="../../assets/img/categorie/alarm.png" >
+        <a class="category-anchor" [routerLink]="['/alertlist']">
+          <h2 class="category-title">!!! Alarme !!!</h2>
+        </a>
+      </a>
+    </ion-col>
+  </ion-row>
+</ion-content>

@@ -1,0 +1,266 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <!--
+      <ion-back-button text="" defaultHref="/categories"></ion-back-button>
+      -->
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Dogwalks</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="openDogwalkCreateModal()">
+        <ion-icon slot="icon-only" name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<!--
+<ion-content fullscreen="true">
+  <ion-list #scheduleList [hidden]="shownSessions === 0">
+      <ion-item-sliding *ngFor="let session of showdata" #slidingItem [attr.track]="item.name[0] | lowercase">
+        <ion-item routerLink="/dogwalkdetail/{{item.id}}" >
+          <div>
+            <p>{{item.name}}</p>
+          </div>
+          <div>
+            <p>{{item.desc}}</p>
+          </div>
+        </ion-item>
+      </ion-item-sliding>
+  </ion-list>
+</ion-content>
+-->
+
+
+<ion-content fullscreen="true">
+  <div *ngIf="datasavailable">
+    <div class="listing-item" *ngFor="let item of showdata">
+      <div *ngIf="item">
+        <ion-card [routerLink]="['/dogwalkdetail/', item.id]">
+          <ion-card-header>
+            <ion-card-title>{{item.name}}</ion-card-title>
+            <ion-card-subtitle>{{item.desc}}</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            {{item.kat}}
+            <ion-row class="image-row">
+              <ion-col size="12">
+                <div class="centered" >
+                  <div *ngIf="item.bild1">
+                    <br>
+                    <img [src]="item.bild1" style="width: 100%; max-height: 250px;">
+                  </div>
+                  <div *ngIf="!item.bild1">
+                    <br>
+                    <img [src]="standardbild" style="width: 100%; max-height: 250px;">
+                  </div>
+                </div>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col>
+                Datum: {{item.datum}}
+              </ion-col>
+              <ion-col>
+                Zeit: {{item.uhrzeit}}
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                Mo:
+                &nbsp;<ion-checkbox [(ngModel)]="item.mo" style="--checkmark-color: black;" disabled="{{disable}}"></ion-checkbox>
+              </ion-col>
+              <ion-col>
+                Di:
+                &nbsp;<ion-checkbox [(ngModel)]="item.di" style="--checkmark-color: black;" disabled="{{disable}}"></ion-checkbox>
+              </ion-col>
+              <ion-col>
+                Mi:
+                &nbsp;<ion-checkbox [(ngModel)]="item.mi" style="--checkmark-color: black;" disabled="{{disable}}"></ion-checkbox>
+              </ion-col>
+              <ion-col>
+                Do:
+                &nbsp;<ion-checkbox [(ngModel)]="item.do" style="--checkmark-color: black;" disabled="{{disable}}"></ion-checkbox>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                Fr:
+                &nbsp;<ion-checkbox [(ngModel)]="item.fr" style="--checkmark-color: black;" disabled="{{disable}}"></ion-checkbox>
+              </ion-col>
+              <ion-col>
+                Sa:
+                &nbsp;<ion-checkbox [(ngModel)]="item.sa" style="--checkmark-color: black;" disabled="{{disable}}"></ion-checkbox>
+              </ion-col>
+              <ion-col>
+                So:
+                &nbsp;<ion-checkbox [(ngModel)]="item.so" style="--checkmark-color: black;" disabled="{{disable}}"></ion-checkbox>
+              </ion-col>
+              <ion-col>
+              </ion-col>
+            </ion-row>
+
+            <ion-card-subtitle>
+              <ion-row>
+                <ion-col col-6 no-padding>
+                  <div class="ion-text-start">
+                  {{item.adress}}
+                </div>
+                </ion-col>
+                <ion-col size="2" class="item-rating" no-padding style="font-size: 16px !important;">
+                  {{item.ratingcounter}}
+                  <ion-icon class="stats-icon" name="star-outline"></ion-icon>
+                </ion-col>
+                <ion-col size="2" class="item-reviews" no-padding style="font-size: 16px !important;">
+                  <div *ngIf="item.comments">
+                    {{item.comments.length}}
+                    <ion-icon class="stats-icon" name="albums"></ion-icon>
+                  </div>
+                  <div *ngIf="!item.comments">
+                    0
+                    <ion-icon class="stats-icon" name="albums"></ion-icon>
+                  </div>
+                </ion-col>
+              </ion-row>
+            </ion-card-subtitle>
+          </ion-card-content>
+        </ion-card>
+        
+        <!--
+
+
+
+        <div [routerLink]="['/dogwalkdetail/', item.id]">
+          <ion-row class="info-row">
+            <ion-col class="main-info-col">
+              <h3 class="item-name">
+                  {{item.name}}
+              </h3>
+              <h4 class="item-name">
+                {{item.desc}}
+              </h4>
+              <p class="item-description">
+                {{item.kat}}
+              </p>
+              <p class="item-address">
+                {{item.adress}}
+              </p>
+            </ion-col>
+          </ion-row>
+          <ion-row class="image-row">
+            <ion-col size="12">
+              <div class="centered" >
+                <div *ngIf="item.bild1">
+                  <br>
+                  <img [src]="item.bild1" style="width: 100%; max-height: 250px;">
+                </div>
+                <div *ngIf="!item.bild1">
+                  <br>
+                  <img [src]="standardbild" style="width: 100%; max-height: 250px;">
+                </div>
+              </div>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              Datum: {{item.datum}}
+            </ion-col>
+            <ion-col>
+              Zeit: {{item.uhrzeit}}
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              Mo:
+              &nbsp;&nbsp;<ion-checkbox [(ngModel)]="item.mo" style="--checkmark-color: black;" disabled="{{disable}}"></ion-checkbox>
+            </ion-col>
+            <ion-col>
+              Di:
+              &nbsp;&nbsp;<ion-checkbox [(ngModel)]="item.di" style="--checkmark-color: black;" disabled="{{disable}}"></ion-checkbox>
+            </ion-col>
+            <ion-col>
+              Mi:
+              &nbsp;&nbsp;<ion-checkbox [(ngModel)]="item.mi" style="--checkmark-color: black;" disabled="{{disable}}"></ion-checkbox>
+            </ion-col>
+            <ion-col>
+              Do:
+              &nbsp;&nbsp;<ion-checkbox [(ngModel)]="item.do" style="--checkmark-color: black;" disabled="{{disable}}"></ion-checkbox>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              Fr:
+              &nbsp;&nbsp;<ion-checkbox [(ngModel)]="item.fr" style="--checkmark-color: black;" disabled="{{disable}}"></ion-checkbox>
+            </ion-col>
+            <ion-col>
+              Sa:
+              &nbsp;&nbsp;<ion-checkbox [(ngModel)]="item.sa" style="--checkmark-color: black;" disabled="{{disable}}"></ion-checkbox>
+            </ion-col>
+            <ion-col>
+              So:
+              &nbsp;&nbsp;<ion-checkbox [(ngModel)]="item.so" style="--checkmark-color: black;" disabled="{{disable}}"></ion-checkbox>
+            </ion-col>
+            <ion-col>
+            </ion-col>
+          </ion-row>
+          <ion-row class="stats-row">
+            <ion-col size="2" class="item-rating">
+              <span class="rating-value">
+                {{item.ratingcounter}}
+              </span>
+              <ion-icon class="stats-icon" src="./assets/custom-icons/travel/star.svg"></ion-icon>
+            </ion-col>
+            <ion-col size="2" class="item-reviews">
+              <span class="reviews-count">
+                <div *ngIf="item.comments">
+                  {{item.comments.length}}
+                </div>
+                <div *ngIf="!item.comments">
+                  0
+                </div>
+              </span>
+              <ion-icon class="stats-icon" src="./assets/custom-icons/travel/comments.svg"></ion-icon>
+            </ion-col>
+          </ion-row>
+        </div>
+        -->
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!datasavailable">
+    <div class="centered">
+      <br><br><br>
+      Keine Daten gefunden......
+      <br><br><br>
+    </div>
+    <div class="centered">
+      <img src="{{standardbild}}">
+    </div>
+  </div>
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end" #fab>
+    <ion-fab-button  (click)="presentFilter()">
+      <ion-icon name="options"></ion-icon>
+    </ion-fab-button>
+    <!--
+    <ion-fab-list side="top">
+      <ion-fab-button color="vimeo" (click)="openSocial('Vimeo', fab)">
+        <ion-icon name="logo-vimeo"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="instagram" (click)="openSocial('Instagram', fab)">
+        <ion-icon name="logo-instagram"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="twitter" (click)="openSocial('Twitter', fab)">
+        <ion-icon name="logo-twitter"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="facebook" (click)="openSocial('Facebook', fab)">
+        <ion-icon name="logo-facebook"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+    -->
+  </ion-fab>
+</ion-content>
+
+
+

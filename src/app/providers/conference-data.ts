@@ -158,4 +158,62 @@ export class ConferenceData {
       })
     );
   }
+
+  getDogwalkFilter() {
+    return this.load().pipe(
+      map((data: any) => {
+        return data.Doggyfilter.sort();
+      })
+    );
+  }
+
+  getPetsittingFilter() {
+    return this.load().pipe(
+      map((data: any) => {
+        return data.Petsittingfilter.sort();
+      })
+    );
+  }
+
+  getCommuntiyKat() {
+    return this.load().pipe(
+      map((data: any) => {
+        return data.CommunityKategories.sort();
+      })
+    );
+  }
+
+  getPetsittingKats() {
+    return this.load().pipe(
+      map((data: any) => {
+        return data.PetsittingKategories.sort();
+      })
+    );
+  }
+
+  getDogwalkKats() {
+    return this.load().pipe(
+      map((data: any) => {
+        return data.DogwalkKategories.sort();
+      })
+    );
+  }
+
+
+  getBoerseKat() {
+    return this.load().pipe(
+      map((data: any) => {
+        return data.BoerseKategories.sort();
+      })
+    );
+  }
+
+  getAlerteKat() {
+    return this.load().pipe(
+      map((data: any) => {
+        return data.AlertKategories.sort();
+      })
+    );
+  }
+
 }

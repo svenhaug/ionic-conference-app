@@ -1,0 +1,135 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-back-button text="" defaultHref="/tabboerse"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Börse</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="fashion-details-content">
+  <div *ngIf="sameuser == '0'">
+    <ion-row class="slider-row">
+      <ion-slides class="details-slides" pager="true" [options]="slidesOptions">
+        <ion-slide *ngFor="let image of showImages">
+          <div class="centered">
+          <!--<ion-row class="slide-inner-row">-->
+            <img [src]="image.source" style="height: 250px; width: 250px;">
+            <app-image-shell [display]="'cover'" animation="spinner" class="showcase-image" [ngClass]="{'centered-image': (image.type === 'square'), 'fill-image': (image.type === 'fill')}" [src]="image.source">
+              <app-aspect-ratio [ratio]="{w:64, h:50}">
+              </app-aspect-ratio>
+            </app-image-shell>
+          </div>
+          <!--</ion-row>-->
+        </ion-slide>
+      </ion-slides>
+    </ion-row>
+    
+    <div class="description-wrapper">
+      <ion-item lines="none">
+        <h3 class="details-name">
+          <!--<app-text-shell animation="gradient" [data]="boerse?.name"></app-text-shell>-->
+          {{boersename}}
+        </h3>
+      </ion-item>
+      <ion-item lines="none">
+        <span class="details-brand">
+        <!--<app-text-shell animation="gradient" [data]="boerse?.desc"></app-text-shell>-->
+          {{boersedesc}}
+        </span>
+      </ion-item>
+      <ion-item lines="none">
+        <span class="details-name">
+        <!--<app-text-shell animation="gradient" [data]="boerse?.desc"></app-text-shell>-->
+          {{boersecontact}}
+        </span>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-label>Preis:</ion-label>
+        <span class="details-price">
+          <!--<app-text-shell animation="gradient" [data]="boerse?.preis | currency"></app-text-shell>-->
+          {{boersepreis}}
+        </span>
+      </ion-item>
+
+    </div>
+    <ion-row class="details-purchase-options-row">
+      <ion-col size="12" class="main-call-to-action-col">
+        <div *ngIf="reserviert !== '1'">  
+          <ion-button class="add-to-cart-btn" expand="block" fill="outline" (click)="meins()" size="default">mein's</ion-button>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-item lines="none">
+      <ion-label>Adresse:</ion-label>
+      <span class="details-price">
+        <!--<app-text-shell animation="gradient" [data]="boerse?.preis | currency"></app-text-shell>-->
+        {{boerseadresse}}
+      </span>
+    </ion-item>
+    <ion-row class="center">
+      <ion-col size="12" class="center">
+        <ion-item lines="none" class="center">
+          <ion-button  fill="clear" (click)="GoNavigation()" class="seeClient" size="default">
+            <ion-icon name="car-sport-outline"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </div>
+  <div *ngIf="sameuser == '1'">
+    <ion-item>
+      <ion-input type="text" placeholder="Titel" [(ngModel)]="boersename" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-textarea type="text" rows="6" placeholder="Beschreibung" [(ngModel)]="boersedesc" required></ion-textarea>
+    </ion-item>
+    <ion-item>
+      <ion-textarea type="text" placeholder="Kontakt" [(ngModel)]="boersecontact" required></ion-textarea>
+    </ion-item>
+    <ion-input type="text" placeholder="Longitude" [(ngModel)]="boerselongitude" hidden></ion-input>
+    <ion-input type="text" placeholder="Latitude" [(ngModel)]="boerselatitude" hidden></ion-input>
+    <ion-item>
+      <ion-input type="decimal" placeholder="0.00" [(ngModel)]="boersepreis"></ion-input>
+    </ion-item>
+    <ion-select placeholder="Kategorie" [(ngModel)]="boersekat" required>
+      <div *ngFor="let kat of kats">
+        <ion-select-option value="{{kat.name}}">{{kat.name}}</ion-select-option>
+      </div>
+    </ion-select>
+    <div class="ion-padding">
+      <ion-item *ngFor="let img of files | async">
+        <img [src]="img.filepath"  (click)="presentAlertConfirm(img.filepath)"/><br>
+      </ion-item>
+      <br>
+      <div class="center">
+        <ion-button expand="block" fill="outline"(click)="fileInput.click()" size="default">
+          <span>Bild hochladen</span>
+          <input #fileInput type="file" (change)="fileUpload($event.target.files)" style="display:none;" />
+        </ion-button>
+      </div>
+      <div class="center">
+        <ion-button expand="block" fill="outline" (click)="savedata()" [disabled]="" size="default">speichern
+        </ion-button>
+        <ion-button expand="block" fill="outline" (click)="deldata()" [disabled]="" size="default">löschen
+        </ion-button>
+      </div>
+    </div>
+    <ion-item>
+      <ion-input type="text" placeholder="Adresse" [(ngModel)]="boerseadress" required></ion-input>
+    </ion-item>
+    <ion-row class="center">
+      <ion-col size="12" class="center">
+        <ion-item lines="none" class="center">
+          <ion-button fill="clear" (click)="GoNavigation()" class="seeClient" size="default">
+            <ion-icon name="car-sport-outline"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-item lines="none">
+      <ion-button expand="block" fill="outline" (click)="checkadress()" class="seeClient" size="default">Adresse prüfen</ion-button>
+      <ion-button expand="block" fill="outline" (click)="checklocaladress()" class="seeClient" size="default">Aktuelle Position verw.</ion-button>
+    </ion-item>
+  </div>
+  <div #map id="map" style="padding-left: 10px; padding-right: 10px;"></div>
+</ion-content>

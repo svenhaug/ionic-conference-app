@@ -1,8 +1,8 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'ionic.conference.app',
-  appName: 'ionic-conference-app',
+  appId: 'dogger.dogger.com',
+  appName: 'dogger',
   webDir: 'www',
   bundledWebRuntime: false,
   plugins: {
@@ -18,7 +18,12 @@ const config: CapacitorConfig = {
       spinnerColor: "#999999",
       splashFullScreen: true,
       splashImmersive: true,
-    },
+    }
+    /*,
+    PushNotifications: {
+      presentationOptions: ["badge", "sound", "alert"]
+    }
+    */
   },
 };
 

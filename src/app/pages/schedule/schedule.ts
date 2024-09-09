@@ -5,6 +5,7 @@ import { AlertController, IonList, IonRouterOutlet, LoadingController, ModalCont
 import { ScheduleFilterPage } from '../schedule-filter/schedule-filter';
 import { ConferenceData } from '../../providers/conference-data';
 import { UserData } from '../../providers/user-data';
+//import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'page-schedule',
@@ -24,6 +25,7 @@ export class SchedulePage implements OnInit {
   groups: any = [];
   confDate: string;
   showSearchbar: boolean;
+  km_search: any;
 
   constructor(
     public alertCtrl: AlertController,

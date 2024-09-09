@@ -1,12 +1,12 @@
 <ion-header translucent="true">
-  <ion-toolbar>
+  <ion-toolbar color="dark">
     <ion-buttons slot="start">
       <ion-button *ngIf="ios" (click)="dismiss()">Cancel</ion-button>
       <ion-button *ngIf="!ios" (click)="selectAll(false)">Reset</ion-button>
     </ion-buttons>
 
     <ion-title>
-      Filter Sessions
+      {{from_view}}-Filter
     </ion-title>
 
     <ion-buttons slot="end">
@@ -16,20 +16,43 @@
 </ion-header>
 
 <ion-content>
-  <ion-list [lines]="ios ? 'inset' : 'full'">
+  <ion-item lines="none" class="ion-text-right">
+    <!--<ion-label>{{ 'AROUND' | translate }}</ion-label>-->
+    <ion-label>Umkreis</ion-label>
+    <ion-select placeholder="" [(ngModel)]="km_search" class="ion-text-right">
+      <ion-select-option value="1">1 km</ion-select-option>
+      <ion-select-option value="2">2 km</ion-select-option>
+      <ion-select-option value="5">5 km</ion-select-option>
+      <ion-select-option value="10">10 km</ion-select-option>
+      <ion-select-option value="20">20 km</ion-select-option>
+      <ion-select-option value="50">50 km</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-list>
+    <!--
     <ion-list-header>Tracks</ion-list-header>
+    -->
+    <div *ngIf="from_view == 'Boerse'">
+      <ion-item>
+        <ion-input type="decimal" placeholder="0.00" [(ngModel)]="boersepreis"></ion-input>
+      </ion-item>
+    </div>
 
     <ion-item *ngFor="let track of tracks" [attr.track]="track.name | lowercase">
       <ion-icon *ngIf="ios" slot="start" [name]="track.icon" color="medium"></ion-icon>
       <ion-label>{{track.name}}</ion-label>
       <ion-checkbox [(ngModel)]="track.isChecked"></ion-checkbox>
     </ion-item>
-
+    <!--
+    <ion-item *ngFor="let book of Books" [attr.track]="book.name | lowercase">
+      <ion-label>{{book.name}}</ion-label>
+      <ion-checkbox [(ngModel)]="book.isChecked"></ion-checkbox>
+    </ion-item>
+    -->
   </ion-list>
-
 </ion-content>
-
-<ion-footer translucent="true" *ngIf="ios">
+<!--<ion-footer translucent="true" *ngIf="ios">-->
+<ion-footer translucent="true">
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-button (click)="selectAll(false)">Deselect All</ion-button>

@@ -1,0 +1,77 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-back-button text="" defaultHref="" (click)="goBack()"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Alert</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="detailcontent">
+  <br/><br/><br/>
+    <br><br>
+    <ion-item>
+      <ion-input type="text" placeholder="Titel" [(ngModel)]="alertname" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-textarea type="text" rows="6" placeholder="Beschreibung" [(ngModel)]="alertdesc" required></ion-textarea>
+    </ion-item>
+    <ion-list lines="none">
+      <h5 class="ion-padding-top ion-padding-start">gemeldet:</h5>
+      <div *ngFor="let comment of commentsdata">
+        <ion-item no-padding>
+          <ion-row class="info-row" >
+            <ion-col class="main-info-col">
+              {{comment.comment}}
+              <p class="item-description">
+                {{comment.timestamp}}
+              </p>
+              <p class="item-address">
+                <img class="useravatar" src="{{comment.useravatar}}">
+                {{comment.username}}
+              </p>
+            </ion-col>
+          </ion-row>
+        </ion-item>
+      </div>
+      <ion-item>  
+        <ion-label>
+          <h3>Adresse:</h3>
+        </ion-label>      
+        <ion-input [(ngModel)]="alertadress" value="" placeholder="Adresse" required></ion-input>
+      </ion-item>
+      <div *ngIf="canedit===1" class="detailcontent">
+        <ion-button expand="block" fill="outline" (click)="checkadress()" class="seeClient" size="default">Adresse prüfen</ion-button>
+        <ion-button expand="block" fill="outline" (click)="checklocaladress()" class="seeClient" size="default">Aktuelle Position</ion-button>     
+        <ion-button expand="block" fill="outline" (click)="savedata()" [disabled]="" size="default">speichern</ion-button>
+        <ion-button expand="block" fill="outline" (click)="deldata()" [disabled]="" size="default">löschen</ion-button>
+      </div>
+    </ion-list>
+  <ion-item #map_ion_item>
+    <div #map id="map"></div>
+  </ion-item>
+  <ion-row class="center" class="detailcontent">
+    <ion-col size="12" class="center">
+      <ion-item lines="none" class="center">
+        <ion-button  fill="claer" (click)="GoNav()" class="seeClient">
+          <ion-icon name="car-sport-outline"></ion-icon>
+        </ion-button>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-list>
+    <div *ngIf="canedit!=1" class="detailcontent">
+      <ion-button expand="block" fill="outline" (click)="dorating('+')" class="seeClient" size="default">Rating &nbsp;&nbsp;
+        <ion-icon name="thumbs-up-outline"></ion-icon>
+      </ion-button>  
+      <ion-button expand="block" fill="outline" (click)="dorating('-')" class="seeClient" size="default">Rating &nbsp;&nbsp;
+        <ion-icon name="thumbs-down-outline"></ion-icon>
+      </ion-button>  
+      <ion-button expand="block" fill="outline" (click)="commentsdo()" class="seeClient" size="default">Melden
+      </ion-button>  
+      <ion-button expand="block" fill="outline" (click)="chatdo()" class="seeClient" size="default">Chat
+      </ion-button>  
+    </div>
+  </ion-list>
+  <br/><br/><br/>
+</ion-content>
+

@@ -1,0 +1,315 @@
+
+<ion-content class="detailcontent">
+  <ion-header>
+    <ion-toolbar color="dark">
+      <ion-buttons slot="start">
+        <ion-back-button text="" defaultHref="" (click)="goBack()"></ion-back-button>
+      </ion-buttons>
+      <ion-title>Petsitting</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <br/><br/><br/>
+  <div *ngIf="canedit!=1" no-padding class="detailcontent">
+    <div *ngIf="posting">
+      <div class="about-header">
+        <ion-slides>
+          <ion-slide>
+            <div *ngIf="posting.bild1">
+              <img src="{{posting.bild1}}">
+            </div>
+            <div *ngIf="!posting.bild1">
+              <br>
+              <img src="{{defaultpic}}" style="width: 50%; height: 50%;">
+            </div>
+          </ion-slide>
+          <div *ngIf="posting.bild2">
+            <ion-slide>
+              <div *ngIf="posting.bild2">
+                <img src="{{posting.bild2}}">
+              </div>
+              <div *ngIf="!posting.bild2">
+                <br>
+                <img src="{{defaultpic}}" style="width: 50%; height: 50%;">
+              </div>
+            </ion-slide>
+          </div>
+          <div *ngIf="posting.bild3">
+            <ion-slide>
+              <div *ngIf="posting.bild3">
+                <img src="{{posting.bild3}}">
+              </div>
+              <div *ngIf="!posting.bild3">
+                <br>
+                <img src="{{defaultpic}}" style="width: 50%; height: 50%;">
+              </div>
+            </ion-slide>
+          </div>
+          <div *ngIf="posting.bild4">
+            <ion-slide>
+              <div *ngIf="posting.bild4">
+                <img src="{{posting.bild4}}">
+              </div>
+              <div *ngIf="!posting.bild4">
+                <br>
+                <img src="{{defaultpic}}" style="width: 50%; height: 50%;">
+              </div>
+            </ion-slide>
+          </div>
+          <div *ngIf="posting.bild5">
+            <ion-slide>
+              <div *ngIf="posting.bild5">
+                <img src="{{posting.bild5}}">
+              </div>
+              <div *ngIf="!posting.bild5">
+                <br>
+                <img src="{{defaultpic}}" style="width: 50%; height: 50%;">
+              </div>
+            </ion-slide>
+          </div>
+        </ion-slides>
+      </div>
+      <div class="about-info">
+        <h3 class="ion-padding-top ion-padding-start">{{posting.name}}</h3>
+        <p class="ion-padding-start ion-padding-end">
+          {{posting.desc}}
+        </p>
+        <ion-list lines="none">
+          <ion-item>
+            <ion-label>
+              Kategorie
+            </ion-label>
+            <ion-text slot="end">{{posting.kat}}</ion-text>
+          </ion-item>
+          <ion-item>
+            <ion-label>
+              Kontakt
+            </ion-label>
+            <ion-text slot="end">{{posting.contact}}</ion-text>
+          </ion-item>
+          <ion-item>
+            <ion-label>
+              Datum
+            </ion-label>
+            <ion-text slot="end">{{posting.datum}}</ion-text>
+          </ion-item>
+          <ion-item>
+            <ion-label>
+              Uhrzeit
+            </ion-label>
+            <ion-text slot="end">{{posting.uhrzeit}}</ion-text>
+          </ion-item>
+          <ion-item>
+            <ion-label>
+              Adresse
+            </ion-label>
+            <ion-text slot="end">{{posting.adress}}</ion-text>
+          </ion-item>
+          <ion-item #map_ion_item >
+            <div #map id="map"></div>
+          </ion-item>
+          <ion-item class="ion-text-center">
+            <ion-button  fill="claer" (click)="GoNavigation()" class="seeClient">
+              <ion-icon name="car-sport-outline"></ion-icon>
+            </ion-button>
+          </ion-item>
+          <ion-item>
+            <ion-row>
+              <ion-col size="3">
+                Mo:
+                <ion-checkbox [(ngModel)]="posting.mo" style="--checkmark-color: black;" disabled="{{disable}}"></ion-checkbox>
+              </ion-col>
+              <ion-col size="3">
+                Di:
+                <ion-checkbox [(ngModel)]="posting.di" style="--checkmark-color: black;" disabled="{{disable}}"></ion-checkbox>
+              </ion-col>
+              <ion-col size="3">
+                Mi:
+                <ion-checkbox [(ngModel)]="posting.mi" style="--checkmark-color: black;" disabled="{{disable}}"></ion-checkbox>
+              </ion-col>
+              <ion-col size="3">
+                Do:
+                <ion-checkbox [(ngModel)]="posting.do" style="--checkmark-color: black;" disabled="{{disable}}"></ion-checkbox>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+          <ion-item>
+            <ion-row>
+              <ion-col size="3">
+                Fr:
+                <ion-checkbox [(ngModel)]="posting.fr" style="--checkmark-color: black;" disabled="{{disable}}"></ion-checkbox>
+              </ion-col>
+              <ion-col size="3">
+                Sa:
+                <ion-checkbox [(ngModel)]="posting.sa" style="--checkmark-color: black;" disabled="{{disable}}"></ion-checkbox>
+              </ion-col>
+              <ion-col size="3">
+                So:
+                <ion-checkbox [(ngModel)]="posting.so" style="--checkmark-color: black;" disabled="{{disable}}"></ion-checkbox>
+              </ion-col>
+              <ion-col size="3">
+              </ion-col>
+            </ion-row>
+          </ion-item>
+          <h5 class="ion-padding-top ion-padding-start">gemeldet:</h5>
+          <div *ngFor="let comment of commentsdata">
+            <ion-item no-padding>
+              <ion-row class="info-row" >
+                <ion-col class="main-info-col">
+                  {{comment.comment}}
+                  <p class="item-description">
+                    {{comment.timestamp}}
+                  </p>
+                  <p class="item-address">
+                    <img class="useravatar" src="{{comment.useravatar}}">
+                    {{comment.username}}
+                  </p>
+                </ion-col>
+              </ion-row>
+            </ion-item>
+          </div>
+        </ion-list>
+        <ion-button expand="block" fill="outline" (click)="dorating('+')" class="seeClient" size="default">Rating &nbsp;&nbsp;
+          <ion-icon name="thumbs-up-outline"></ion-icon>
+        </ion-button>  
+        <ion-button expand="block" fill="outline" (click)="dorating('-')" class="seeClient" size="default">Rating &nbsp;&nbsp;
+          <ion-icon name="thumbs-down-outline"></ion-icon>
+         </ion-button>  
+         <ion-button expand="block" fill="outline" (click)="commentsdo()" class="seeClient" size="default">Melden
+        </ion-button>  
+        <ion-button expand="block" fill="outline" (click)="chatdo()" class="seeClient" size="default">Chat
+         </ion-button>  
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="canedit===1" class="ion-padding" class="detailcontent">
+    <div *ngIf="posting">
+      <ion-item>
+        <ion-input [(ngModel)]="posting.name" value="" placeholder="Name" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-textarea rows="6" [(ngModel)]="posting.desc" value="" placeholder="Beschreibung" required></ion-textarea>
+      </ion-item>
+      <ion-input type="text" placeholder="Longitude" [(ngModel)]="petsittinglongitude" hidden></ion-input>
+      <ion-input type="text" placeholder="Latitude" [(ngModel)]="petsittinglatitude" hidden></ion-input>
+      <ion-input type="text" placeholder="kein Kontakt angegeben" [(ngModel)]="contact"></ion-input>
+      <ion-item lines="none" class="ion-no-padding">
+        <ion-label>Datum</ion-label>
+        <ion-input 
+          value="{{ posting.datum | date: 'dd.MM.yyyy' }}"
+          id="date"
+          class="ion-text-end"
+        ></ion-input>
+        <ion-popover trigger="date" size="cover">
+          <ng-template>
+            <ion-datetime
+              id="checkdate"
+              max="2025-01-01"
+              min="2022-01-01"
+              presentation="date"
+              [(ngModel)]="posting.datum"
+              locale="de-DE"
+              [showDefaultButtons]="true" doneText="ok" cancelText="cancel"
+              value="posting.datum"
+              (click)="checkday()"
+            ></ion-datetime>
+          </ng-template>
+        </ion-popover>
+      </ion-item>
+      <ion-item lines="none" class="ion-no-padding">
+        <ion-label>Uhrzeit</ion-label>
+        <ion-input 
+          value="{{ posting.uhrzeit}}"
+          id="uhrzeit"
+          class="ion-text-end"
+        ></ion-input>
+        <ion-popover trigger="uhrzeit" size="cover">
+          <ng-template>
+            <ion-datetime
+              max="2025-01-01"
+              min="2022-01-01"
+              presentation="time"
+              hour-cycle="h23"
+              [(ngModel)]="posting.uhrzeit"
+              locale="de-DE"
+              [showDefaultButtons]="true" doneText="ok" cancelText="cancel"
+              value="posting.uhrzeit"
+            ></ion-datetime>
+          </ng-template>
+        </ion-popover>
+      </ion-item>
+      <ion-row>
+        <ion-col>
+          Mo:
+          &nbsp;&nbsp;<ion-checkbox [(ngModel)]="posting.mo" style="--checkmark-color: black;" (ionChange)="checkalldays($event)"></ion-checkbox>
+        </ion-col>
+        <ion-col>
+          Di:
+          &nbsp;&nbsp;<ion-checkbox [(ngModel)]="posting.di" style="--checkmark-color: black;" (ionChange)="checkalldays($event)"></ion-checkbox>
+        </ion-col>
+        <ion-col>
+          Mi:
+          &nbsp;&nbsp;<ion-checkbox [(ngModel)]="posting.mi" style="--checkmark-color: black;" (ionChange)="checkalldays($event)"></ion-checkbox>
+        </ion-col>
+        <ion-col>
+          Do:
+          &nbsp;&nbsp;<ion-checkbox [(ngModel)]="posting.do" style="--checkmark-color: black;" (ionChange)="checkalldays($event)"></ion-checkbox>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          Fr:
+          &nbsp;&nbsp;<ion-checkbox [(ngModel)]="posting.fr" style="--checkmark-color: black;" (ionChange)="checkalldays($event)"></ion-checkbox>
+        </ion-col>
+        <ion-col>
+          Sa:
+          &nbsp;&nbsp;<ion-checkbox [(ngModel)]="posting.sa" style="--checkmark-color: black;" (ionChange)="checkalldays($event)"></ion-checkbox>
+        </ion-col>
+        <ion-col>
+          So:
+          &nbsp;&nbsp;<ion-checkbox [(ngModel)]="posting.so" style="--checkmark-color: black;" (ionChange)="checkalldays($event)"></ion-checkbox>
+        </ion-col>
+        <ion-col>
+        </ion-col>
+      </ion-row>
+      <ion-item *ngFor="let session of posting.ratings">
+        <ion-label>
+          <h3>{{session.timestamp}}</h3>
+        </ion-label>
+      </ion-item>
+      <ion-item *ngFor="let img of files | async">
+        <img [src]="img.filepath"  (click)="presentAlertConfirm(img.filepath)"/><br>
+      </ion-item>
+      <div class="center">
+        <ion-button expand="block" fill="outline" (click)="fileInput.click()" size="default">
+          <span>Bild hochladen</span>
+          <input #fileInput type="file" (change)="fileUpload($event.target.files)" style="display:none;" />
+        </ion-button>
+      </div>
+      <br>      
+      <ion-button expand="block" fill="outline" (click)="savedata()" size="default">speichern</ion-button>
+      <ion-button expand="block" fill="outline" (click)="deldata()" size="default">löschen</ion-button>
+    </div>
+    <ion-item>  
+      <ion-label>
+        <h3>Adresse:</h3>
+      </ion-label>      
+      <ion-input [(ngModel)]="petsittingadress" value="" placeholder="Adresse" required></ion-input>
+    </ion-item>
+    <ion-item #map_ion_item >
+      <div #map id="map"></div>
+    </ion-item>
+    <ion-row class="center">
+      <ion-col size="12" class="center">
+        <ion-item lines="none" class="center">
+          <ion-button  fill="clear" (click)="GoNavigation()" class="seeClient">
+            <ion-icon name="car-sport-outline"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <!--<ion-button slot="end" fill="outline" (click)="deletefilesCollection()" class="seeClient">deletefilesCollection</ion-button>-->
+    <ion-button expand="block" fill="outline" (click)="checkadress()" class="seeClient" size="default">Adresse prüfen</ion-button>
+    <ion-button expand="block" fill="outline" (click)="checklocaladress()" class="seeClient" size="default">Aktuelle Position</ion-button>     
+  </div>
+</ion-content>

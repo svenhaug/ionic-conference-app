@@ -1,6 +1,6 @@
 {
-	"appId": "ionic.conference.app",
-	"appName": "ionic-conference-app",
+	"appId": "dogger.dogger.com",
+	"appName": "dogger",
 	"webDir": "www",
 	"bundledWebRuntime": false,
 	"plugins": {

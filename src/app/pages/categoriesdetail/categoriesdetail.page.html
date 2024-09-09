@@ -1,0 +1,141 @@
+<ion-content class="detailcontent">
+  <ion-header>
+    <ion-toolbar color="dark">
+      <ion-buttons slot="start">
+        <ion-back-button text="" defaultHref="" (click)="goBack()"></ion-back-button>
+      </ion-buttons>
+      <ion-title>Community</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <br/><br/><br/>
+  <div *ngIf="canedit===0" no-padding class="detailcontent">
+    <br><br>
+    <div *ngIf="posting">
+      <div class="about-header">
+        <ion-slides>
+          <ion-slide>
+            <div *ngIf="posting.bild1">
+              <img src="{{posting.bild1}}">
+            </div>
+            <div *ngIf="!posting.bild1">
+              <br>
+              <img src="{{defaultpic}}" style="width: 50%; height: 50%;">
+            </div>
+          </ion-slide>
+          <ion-slide>
+            <div *ngIf="posting.bild2">
+              <img src="{{posting.bild2}}">
+            </div>
+            <div *ngIf="!posting.bild2">
+              <br>
+              <img src="{{defaultpic}}" style="width: 50%; height: 50%;">
+            </div>
+          </ion-slide>
+          <ion-slide>
+            <div *ngIf="posting.bild3">
+              <img src="{{posting.bild3}}">
+            </div>
+            <div *ngIf="!posting.bild3">
+              <br>
+              <img src="{{defaultpic}}" style="width: 50%; height: 50%;">
+            </div>
+          </ion-slide>
+          <ion-slide>
+            <div *ngIf="posting.bild4">
+              <img src="{{posting.bild4}}">
+            </div>
+            <div *ngIf="!posting.bild4">
+              <br>
+              <img src="{{defaultpic}}" style="width: 50%; height: 50%;">
+            </div>
+          </ion-slide>
+          <ion-slide>
+            <div *ngIf="posting.bild5">
+              <img src="{{posting.bild5}}">
+            </div>
+            <div *ngIf="!posting.bild5">
+              <br>
+              <img src="{{defaultpic}}" style="width: 50%; height: 50%;">
+            </div>
+          </ion-slide>
+        </ion-slides>
+      </div>
+      <div class="about-info">
+        <h3 class="ion-padding-top ion-padding-start">{{posting.name}}</h3>
+        <p class="ion-padding-start ion-padding-end">
+          {{posting.desc}}
+        </p>
+        <ion-list lines="none">
+          <ion-item>
+            <ion-label>
+              Kategorie
+            </ion-label>
+            <ion-text slot="end">{{posting.kat}}</ion-text>
+          </ion-item>
+          <h5 class="ion-padding-top ion-padding-start">gemeldet:</h5>
+          <div *ngFor="let comment of commentsdata">
+            <ion-item no-padding>
+              <ion-row class="info-row" >
+                <ion-col class="main-info-col">
+                  {{comment.comment}}
+                  <p class="item-description">
+                    {{comment.timestamp}}
+                  </p>
+                  <p class="item-address">
+                    <img class="useravatar" src="{{comment.useravatar}}">
+                    {{comment.username}}
+                  </p>
+                </ion-col>
+              </ion-row>
+            </ion-item>
+          </div>
+        </ion-list>
+        <ion-row class="center">
+          <ion-col size="12" class="center">
+              <ion-button expand="block" fill="outline" (click)="dorating('+')" class="seeClient" size="default">Rating &nbsp;&nbsp;
+                <ion-icon name="thumbs-up-outline"></ion-icon>
+              </ion-button>  
+              <ion-button expand="block" fill="outline" (click)="dorating('-')" class="seeClient" size="default">Rating &nbsp;&nbsp;
+                <ion-icon name="thumbs-down-outline"></ion-icon>
+               </ion-button>  
+          </ion-col>
+          <ion-col size="12" class="center">
+            <ion-button expand="block" fill="outline" (click)="commentsdo()" class="seeClient" size="default">Melden
+            </ion-button>  
+            <ion-button expand="block" fill="outline" (click)="chatdo()" class="seeClient" size="default">Chat
+             </ion-button>  
+          </ion-col>
+        </ion-row>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="canedit===1" class="ion-padding" class="detailcontent">
+    <br><br>
+    <ion-item>
+      <ion-input type="text" placeholder="Titel" [(ngModel)]="categoriename" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-textarea type="text" rows="6" placeholder="Beschreibung" [(ngModel)]="categoriedesc" required></ion-textarea>
+    </ion-item>
+    
+    <ion-select placeholder="Kategorie" [(ngModel)]="categoriekat" required>
+      <div *ngFor="let kat of kats">
+        <ion-select-option value="{{kat.name}}">{{kat.name}}</ion-select-option>
+      </div>
+    </ion-select>
+     <ion-item *ngFor="let img of files | async">
+        <div class="centered">
+          <img [src]="img.filepath"  (click)="presentAlertConfirm(img.filepath)" /><br>
+        </div>
+      </ion-item>
+        <ion-button expand="block" fill="outline" (click)="fileInput.click()" size="default">
+          <span>Bild hochladen</span>
+          <input #fileInput type="file" (change)="fileUpload($event.target.files)" style="display:none;" />
+        </ion-button>
+        <ion-button expand="block" fill="outline" (click)="savedata()" [disabled]="" size="default">speichern
+        </ion-button>
+          <ion-button expand="block" fill="outline" (click)="deldata()" [disabled]="" size="default">löschen
+        </ion-button>
+  </div>
+
+</ion-content>

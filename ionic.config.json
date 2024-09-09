@@ -1,5 +1,5 @@
 {
-  "name": "ionic-conference-app",
+  "name": "dogger",
   "type": "angular",
   "integrations": {
     "capacitor": {}

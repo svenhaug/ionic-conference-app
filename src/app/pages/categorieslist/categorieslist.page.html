@@ -1,0 +1,164 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <!--
+      <ion-back-button text="" defaultHref="/categories"></ion-back-button>
+      -->
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Community</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="openCommunityCreateModal()">
+        <ion-icon slot="icon-only" name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content fullscreen="true">
+  <div *ngIf="datasavailable">
+    <div class="listing-item" *ngFor="let item of showdata">
+      <div *ngIf="item">
+        <ion-card [routerLink]="['/categoriesdetail/', item.id]">
+          <ion-row class="image-row">
+            <ion-col size="3">
+              <div class="centered" style="padding-left: 8px;">
+                <div *ngIf="item.bild1">
+                  <br>
+                  <img [src]="item.bild1" style="width: 80px; max-height: 80px; border-radius: 8px;">
+                </div>
+                <div *ngIf="!item.bild1">
+                  <br>
+                  <img [src]="standardbild" style="width: 80px; max-height: 80px; border-radius: 8px;">
+                </div>
+              </div>
+            </ion-col>
+            <ion-col size="9">
+              <ion-card-header>
+                <ion-card-title>{{item.name}}</ion-card-title>
+                <ion-card-subtitle>{{item.desc}}</ion-card-subtitle>
+              </ion-card-header>
+              <ion-card-content>
+                {{item.kat}}
+                <ion-card-subtitle>
+                  <ion-row>
+                    <ion-col col-5 no-padding style="font-size: 12px !important;">
+                      {{item.timestampformat}}
+                    </ion-col>
+                    <ion-col size="2" class="item-rating" no-padding style="font-size: 16px !important;">
+                      {{item.ratingcounter}}
+                      <ion-icon class="stats-icon" name="star-outline"></ion-icon>
+                    </ion-col>
+                    <ion-col size="2" class="item-reviews" no-padding style="font-size: 16px !important;">
+                      <div *ngIf="item.comments">
+                        {{item.comments.length}}
+                        <ion-icon class="stats-icon" name="albums"></ion-icon>
+                      </div>
+                      <div *ngIf="!item.comments">
+                        0
+                        <ion-icon class="stats-icon" name="albums"></ion-icon>
+                      </div>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col col-2 no-padding>
+                      <div class="ion-text-start">
+                        {{item.adress}}
+                      </div>
+                    </ion-col>
+                  </ion-row>
+                </ion-card-subtitle>
+              </ion-card-content>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+        <!--
+        <div [routerLink]="['/categoriesdetail/', item.id]">
+          <ion-row class="info-row">
+            <ion-col class="main-info-col">
+              <h1 class="item-name">
+                {{item.name}}
+              </h1>
+              <p class="item-name">
+                {{item.desc}}
+              </p>
+              <p class="item-name">
+                {{item.adress}}
+              </p>
+              <p class="item-description">
+                {{item.kat}}
+              </p>
+            </ion-col>
+          </ion-row>
+          <ion-row class="image-row">
+            <ion-col size="12">
+              <div class="centered" >
+                <div *ngIf="item.bild1">
+                  <br>
+                  <img [src]="item.bild1" style="width: 100%; max-height: 250px;">
+                </div>
+                <div *ngIf="!item.bild1">
+                  <br>
+                  <img [src]="standardbild" style="width: 100%; max-height: 250px;">
+                </div>
+              </div>
+            </ion-col>
+          </ion-row>
+          <ion-row class="stats-row">
+            <ion-col size="2" class="item-rating">
+              <span class="rating-value">
+                {{item.ratingcounter}}
+              </span>
+              <ion-icon class="stats-icon" src="./assets/custom-icons/travel/star.svg"></ion-icon>
+            </ion-col>
+            <ion-col size="2" class="item-reviews">
+              <span class="reviews-count">
+                <div *ngIf="item.comments">
+                  {{item.comments.length}}
+                </div>
+                <div *ngIf="!item.comments">
+                  0
+                </div>
+              </span>
+              <ion-icon class="stats-icon" src="./assets/custom-icons/travel/comments.svg"></ion-icon>
+            </ion-col>
+          </ion-row>
+        </div>
+        -->
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!datasavailable">
+    <div class="centered">
+      <br><br><br>
+      Keine Daten gefunden......
+      <br><br><br>
+    </div>
+    <div class="centered">
+      <img src="{{standardbild}}">
+    </div>
+  </div>
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end" #fab>
+    <ion-fab-button  (click)="presentFilter()">
+      <ion-icon name="options"></ion-icon>
+    </ion-fab-button>
+    <!--
+    <ion-fab-list side="top">
+      <ion-fab-button color="vimeo" (click)="openSocial('Vimeo', fab)">
+        <ion-icon name="logo-vimeo"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="instagram" (click)="openSocial('Instagram', fab)">
+        <ion-icon name="logo-instagram"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="twitter" (click)="openSocial('Twitter', fab)">
+        <ion-icon name="logo-twitter"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="facebook" (click)="openSocial('Facebook', fab)">
+        <ion-icon name="logo-facebook"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+    -->
+  </ion-fab>
+  
+</ion-content>

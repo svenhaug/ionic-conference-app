@@ -1,0 +1,26 @@
+.iconEye {
+    font-size: 24px;
+    padding-left: 4px;
+    padding-top: 12px;
+    //vertical-align: middle;
+}
+
+ion-item {
+    margin-bottom: 10px;
+    background: transparent;
+    --highlight-height: 0px;
+    /*
+    border: 1px solid #eac402;
+    --highlight-color-valid: #eac402;
+    --highlight-color-focused: #eac402;
+    --highlight-color-invalid: #eac402;
+    */
+}
+
+.hacking-datetime {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }

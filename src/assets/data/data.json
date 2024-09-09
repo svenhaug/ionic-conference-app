@@ -463,5 +463,167 @@
       "name": "Navigation",
       "icon": "compass"
     }
+  ],
+  "Doggyfilter": [
+    {
+      "name": "Mo",
+      "icon": "document"
+    },
+    {
+      "name": "Di",
+      "icon": "restaurant"
+    },
+    {
+      "name": "Mi",
+      "icon": "logo-ionic"
+    },
+    {
+      "name": "Do",
+      "icon": "hammer"
+    },
+    {
+      "name": "Fr",
+      "icon": "color-palette"
+    },
+    {
+      "name": "Sa",
+      "icon": "cog"
+    },
+    {
+      "name": "So",
+      "icon": "construct"
+    },
+    {
+      "name": "alle Hunde",
+      "icon": "construct"
+    },
+    {
+      "name": "kleine Hunde",
+      "icon": "construct"
+    },
+    {
+      "name": "mittlere Hunde",
+      "icon": "construct"
+    },
+    {
+      "name": "grosse Hunde",
+      "icon": "construct"
+    }
+
+  ],
+  "Petsittingfilter": [
+    {
+      "name": "Mo",
+      "icon": "document"
+    },
+    {
+      "name": "Di",
+      "icon": "restaurant"
+    },
+    {
+      "name": "Mi",
+      "icon": "logo-ionic"
+    },
+    {
+      "name": "Do",
+      "icon": "hammer"
+    },
+    {
+      "name": "Fr",
+      "icon": "color-palette"
+    },
+    {
+      "name": "Sa",
+      "icon": "cog"
+    },
+    {
+      "name": "So",
+      "icon": "construct"
+    }
+  ],
+  "CommunityKategories": 
+  [
+    {
+      "name": "Fun",
+      "icon": "document"
+    },
+    {
+      "name": "Freunde finden",
+      "icon": "restaurant"
+    },
+    {
+      "name": "Geschichten",
+      "icon": "logo-ionic"
+    },
+    {
+      "name": "Pics",
+      "icon": "hammer"
+    }
+  ]
+  ,
+  "BoerseKategories": 
+  [
+    {
+      "name": "Fun",
+      "icon": "document"
+    },
+    {
+      "name": "Freunde finden",
+      "icon": "restaurant"
+    },
+    {
+      "name": "Geschichten",
+      "icon": "logo-ionic"
+    },
+    {
+      "name": "Pics",
+      "icon": "hammer"
+    }
+  ]
+  ,
+  "PetsittingKategories":
+  [
+    {
+      "name": "alle Hunde",
+      "icon": ""
+    },
+    {
+      "name": "kleine Hunde",
+      "icon": ""
+    },
+    {
+      "name": "mittelgrosse Hunde",
+      "icon": ""
+    }
+    ,
+    {
+      "name": "grosse Hund",
+      "icon": ""
+    }
+  ]
+  ,
+  "DogwalkKategories":
+  [
+    {
+      "name": "alle Hunde",
+      "icon": ""
+    },
+    {
+      "name": "kleine Hunde",
+      "icon": ""
+    },
+    {
+      "name": "mittelgrosse Hunde",
+      "icon": ""
+    }
+    ,
+    {
+      "name": "grosse Hund",
+      "icon": ""
+    }
+  ]
+  ,
+  "AlertKategories": 
+  [
   ]
 }
